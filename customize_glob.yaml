@@ -1,0 +1,6 @@
+
+device_tracker.*:
+    templates:
+      theme: >
+        if (state === 'home') return 'green_badge';
+        return 'red_badge';

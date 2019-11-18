@@ -1,0 +1,36 @@
+- id: '1574020983110'
+  alias: Alarm Armed
+  description: ''
+  trigger:
+  - entity_id: alarm_control_panel.alarm_com
+    from: disarmed
+    platform: state
+    to: armed_home
+  - entity_id: alarm_control_panel.alarm_com
+    from: disarmed
+    platform: state
+    to: armed_away
+  condition: []
+  action:
+  - data:
+      entity_id: all
+      message: the house has been secured!
+    service: tts.google_translate_say
+- id: '1574024505232'
+  alias: Alarm Disarmed
+  description: ''
+  trigger:
+  - entity_id: alarm_control_panel.alarm_com
+    from: armed_home
+    platform: state
+    to: disarmed
+  - entity_id: alarm_control_panel.alarm_com
+    from: armed_away
+    platform: state
+    to: disarmed
+  condition: []
+  action:
+  - data:
+      entity_id: all
+      message: the house is no longer secured.
+    service: tts.google_translate_say

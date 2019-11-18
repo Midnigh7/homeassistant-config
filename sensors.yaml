@@ -1,0 +1,21 @@
+  - platform: synologydsm
+    host: 192.168.2.3
+    username: !secret syn_username
+    password: !secret syn_password
+    monitored_conditions:
+      - cpu_total_load
+      - memory_real_usage
+      - network_up
+      - network_down
+      - disk_smart_status
+      - volume_status
+      - volume_percentage_used
+     
+  - platform: reddit
+    username: !secret reddit_username
+    password: !secret reddit_password
+    client_id: !secret reddit_client_id
+    client_secret: !secret reddit_client_secret
+    subreddits:
+      - news
+      - worldnews

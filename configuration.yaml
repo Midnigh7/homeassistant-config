@@ -1,0 +1,58 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+homeassistant:
+  customize: !include customize.yaml
+  customize_glob: !include customize_glob.yaml
+#discovery:
+frontend:
+  themes: !include themes.yaml
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+camera:
+  - platform: synology
+    url: https://192.168.2.3:5001
+    username: !secret syn_username
+    password: !secret syn_password
+    verify_ssl: false
+    
+alarm_control_panel:
+  platform: alarmdotcom
+  username: !secret alarm_username
+  password: !secret alarm_password
+  
+sensor: !include sensors.yaml
+
+
+
+panel_iframe:
+  tasmoadmin:
+    title: TasmoAdmin
+    icon: mdi:lightbulb-on
+    url: 'http://192.168.1.190:9541'
+
+sonos:
+  media_player:
+    hosts:
+      - 192.168.2.194
+      - 192.168.2.196
+      
+alexa_media:
+  accounts:
+    - email: !secret amazon_user
+      password: !secret amazon_password
+      url: amazon.com
+      exclude_devices:
+        - This Device
+        - naomi's Alexa Apps
+        - Nick's Alexa Apps
