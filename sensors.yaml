@@ -19,3 +19,26 @@
     subreddits:
       - news
       - worldnews
+
+  - platform: darksky
+    api_key: !secret darksky_api
+    forcast:
+     - 0
+    hourly_forcast:
+     - 0
+     - 1
+    monitored_conditions:
+     - summary
+     - icon
+     - temperature
+     - cloud_cover
+     - precip_type
+     - precip_intensity
+
+  - platform: template
+    sensors:
+      living_room_motion:
+        friendly_name: "Living room motion"
+        entity_id: alarm_control_panel.alarm_com
+        value_template: "{{ 'Living Room Motion Dector is Activated' in state_attr('alarm_control_panel.alarm_com', 'sensor_status') }}"
+        sevice_class: motion

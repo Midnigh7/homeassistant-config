@@ -4,6 +4,7 @@ default_config:
 homeassistant:
   customize: !include customize.yaml
   customize_glob: !include customize_glob.yaml
+
 #discovery:
 frontend:
   themes: !include themes.yaml
@@ -14,10 +15,13 @@ frontend:
 # Text to speech
 tts:
   - platform: google_translate
+  
 
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+timer: !include timers.yaml
+sensor: !include sensors.yaml
 
 camera:
   - platform: synology
@@ -31,15 +35,6 @@ alarm_control_panel:
   username: !secret alarm_username
   password: !secret alarm_password
   
-sensor: !include sensors.yaml
-
-
-
-panel_iframe:
-  tasmoadmin:
-    title: TasmoAdmin
-    icon: mdi:lightbulb-on
-    url: 'http://192.168.1.190:9541'
 
 sonos:
   media_player:
@@ -56,3 +51,8 @@ alexa_media:
         - This Device
         - naomi's Alexa Apps
         - Nick's Alexa Apps
+        
+rest_command:
+  google_backup:
+    url: 'http://192.168.1.190:8055/gbdoBackup'
+    timeout: '300'

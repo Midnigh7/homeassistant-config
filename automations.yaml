@@ -13,7 +13,7 @@
   condition: []
   action:
   - data:
-      entity_id: all
+      entity_id: Sonos*
       message: the house has been secured!
     service: tts.google_translate_say
 - id: '1574024505232'
@@ -31,6 +31,48 @@
   condition: []
   action:
   - data:
-      entity_id: all
-      message: the house is no longer secured.
-    service: tts.google_translate_say
+      data_template:
+        speech_meessage: the house is no longer secured.
+    service: script.announcement
+- id: '1574105138466'
+  alias: Hassio Backup
+  description: ''
+  trigger:
+  - at: 01:00:00
+    platform: time
+  condition: []
+  action:
+  - service: hassio.snapshot_full
+  - delay: 00:00:30
+  - service: rest_command.google_backup
+- id: '1574138117406'
+  alias: switch test
+  description: ''
+  trigger:
+  - entity_id: switch.fireplace
+    from: 'off'
+    platform: state
+    to: 'on'
+  action:
+    data_template:
+      speech_message: '''{{ [ "Fine", "got it bos", "yeah yeah yeah", "quit telling
+        me what to do", "Yes master", "I will do what I want", "whatever", "if you
+        insist", "about time"  ] | random}}''
+
+        '
+    service: script.announcement
+- id: '1574145496152'
+  alias: timer test stop
+  description: ''
+  trigger:
+  - event_data:
+      entity_id: timer.test
+    event_type: timer.finished
+    platform: event
+  condition: []
+  action:
+  - data:
+      data:
+        type: tts
+      message: timer stopped
+    service: notify.alexa_media_living_room_dot

@@ -1,0 +1,4 @@
+test_overview:
+  name: The Test Box
+  entities:
+    - script.announce
